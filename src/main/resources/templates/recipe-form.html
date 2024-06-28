@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Recipe</title>
+</head>
+<body>
+<h1>Add Recipe</h1>
+<form th:action="@{/recipe/add}" th:object="${recipe}" method="post">
+    <input th:field="*{id}" type="hidden">
+    <div>
+        <label for="recipeName">Name :</label>
+        <input th:field="*{name}" type="text" id="recipeName">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+    <div>
+        <label for="recipeIngredients">List of ingredients :</label>
+        <input th:field="*{ingredients}" type="text" id="recipeIngredients">
+        <span th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></span>
+        <small>Please separate ingredients with commas !!</small>
+    </div>
+    <div>
+        <label for="recipeInstructions">Instructions :</label>
+        <input th:field="*{instructions}" type="text" id="recipeInstructions">
+        <span th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}"></span>
+    </div>
+    <div>
+        <label for="recipeCategory">Categories :</label>
+        <select th:field="*{categoryId}" id="recipeCategory" >
+            <option th:each="category : ${categories}" th:value="${category.getId()}" th:text="${category.getName()}"></option>
+        </select>
+    </div>
+    <button type="submit">Validate</button>
+</form>
+
+</body>
+</html>
